@@ -6,7 +6,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "traffic-cv-api"
 version = "0.1.0"
+description = "FastAPI and YOLOv8 based Traffic Computer Vision API"
+readme = "README.md"
 requires-python = ">=3.11"
+license = {text = "MIT"}
 dependencies = [
     "fastapi>=0.110",
     "uvicorn[standard]",
@@ -27,3 +30,31 @@ dev = [
     "black",
     "pre-commit"
 ]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # exclude automated folders
+  \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+# Modern configuration to fix the 'deprecated' warning
+select = ["E", "F", "I"]
+fixable = ["ALL"]
+ignore = []
+
+[tool.ruff.lint.isort]
+# Ensures imports are sorted correctly at the top of the file
+known-first-party = ["src"]

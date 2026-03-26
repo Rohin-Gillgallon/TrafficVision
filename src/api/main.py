@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from prometheus_fastapi_instrumentator import Instrumentator
+
 from src.api.routes.cameras import router as cameraRouter
 
 app = FastAPI(

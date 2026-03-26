@@ -1,6 +1,7 @@
-from src.worker.celery_app import celery_app
-from src.db.crud import delete_old_detections
 import asyncio
+
+from src.db.crud import delete_old_detections
+from src.worker.celery_app import celery_app
 
 
 @celery_app.task(name="src.worker.tasks.cleanup_old_records")

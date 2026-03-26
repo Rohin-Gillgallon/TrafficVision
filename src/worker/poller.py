@@ -1,12 +1,13 @@
-import httpx
-from src.core.config import settings
-from src.worker.celery_app import celery_app
-from src.worker.detector import run_detection
-
 import asyncio
+
+import httpx
+from sqlalchemy import select
+
+from src.core.config import settings
 from src.db.crud import get_session
 from src.db.models import Camera
-from sqlalchemy import select
+from src.worker.celery_app import celery_app
+from src.worker.detector import run_detection
 
 
 @celery_app.task

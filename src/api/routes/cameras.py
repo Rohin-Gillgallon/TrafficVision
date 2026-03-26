@@ -1,12 +1,15 @@
-from fastapi import APIRouter, Query, HTTPException
 from datetime import datetime
+
+from fastapi import APIRouter, HTTPException, Query
+
+from src.api.schemas.detection import (
+    CameraCreate,
+    CameraStats,
+)
 from src.api.schemas.detection import (
     DetectionResponse as DetectionOut,
-    CameraStats,
-    CameraCreate,
 )
-from src.db.crud import get_latest, get_history, get_busiest, create_camera
-
+from src.db.crud import create_camera, get_busiest, get_history, get_latest
 
 router = APIRouter(prefix="/cameras", tags=["cameras"])
 

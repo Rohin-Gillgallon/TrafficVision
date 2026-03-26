@@ -1,5 +1,6 @@
 import httpx
 from ultralytics import YOLO
+
 from src.core.config import settings
 from src.db.crud import save_detections
 from src.worker.celery_app import celery_app
@@ -8,8 +9,9 @@ model = YOLO(settings.yolo_model)
 
 
 def detect_vehicles(image_bytes: bytes) -> list[dict]:
-    from PIL import Image
     import io
+
+    from PIL import Image
 
     img = Image.open(io.BytesIO(image_bytes))
     # Extremely sensitive threshold for low-res JamCams

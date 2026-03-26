@@ -1,20 +1,23 @@
 # src/db/crud.py
+from contextlib import asynccontextmanager
+from datetime import datetime, timedelta
+from typing import AsyncGenerator
+from uuid import uuid4
+
+import sqlalchemy
+from sqlalchemy import and_, desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import select, and_, func, desc
-import sqlalchemy
-from datetime import datetime, timedelta
-from uuid import uuid4
-from src.db.models import Base, Detection, Camera
 from sqlalchemy.pool import NullPool
+
 from src.core.config import settings
-from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+from src.db.models import Base, Camera, Detection
 
 engine = create_async_engine(
     settings.database_url,
     echo=False,
-    poolclass=NullPool,  # Disable pooling to avoid issues with repeated asyncio.run calls
+    # Disable pooling to avoid issues with repeated asyncio.run calls
+    poolclass=NullPool,
 )
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
