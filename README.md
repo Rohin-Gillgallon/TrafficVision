@@ -36,6 +36,19 @@ Once the containers are running, initialize the schema and seed initial camera m
 python -c "import asyncio; from src.db.crud import init_db; asyncio.run(init_db())"
 ```
 
+### Running Services Manually
+If you prefer to run the services individually instead of using Docker:
+```bash
+# Terminal 1: API Server
+uvicorn src.api.main:app --reload
+
+# Terminal 2: Celery Worker (Windows requires -P solo)
+celery -A src.worker.celery_app worker -l info -P solo
+
+# Terminal 3: Celery Beat (Task Scheduler)
+celery -A src.worker.celery_app beat -l info
+```
+
 ### 3. Access Dashboard
 - **Frontend**: http://localhost:3000
 - **API Docs**: http://localhost:8000/docs
