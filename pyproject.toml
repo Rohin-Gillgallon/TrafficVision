@@ -1,0 +1,29 @@
+[build-system]
+# We use build_meta for modern PEP 517 compliance
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "traffic-cv-api"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]",
+    "celery[redis]",
+    "ultralytics",                           # YOLOv8
+    "sqlalchemy[asyncio]",
+    "asyncpg",                               # async postgres driver
+    "pydantic-settings",
+    "httpx",                                 # async HTTP for TfL
+    "prometheus-fastapi-instrumentator",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+    "black",
+    "pre-commit"
+]
