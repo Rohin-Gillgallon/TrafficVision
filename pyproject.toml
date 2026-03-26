@@ -58,3 +58,8 @@ ignore = []
 [tool.ruff.lint.isort]
 # Ensures imports are sorted correctly at the top of the file
 known-first-party = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "strict"
+testpaths = ["tests"]

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class DetectionResponse(BaseModel):
@@ -13,7 +13,8 @@ class DetectionResponse(BaseModel):
     bbox: list[float]
     detected_at: datetime
     image_url: str | None = None
-    model_config = {"from_attributes": True}
+    elapsed: float | None = None
+    model_config = ConfigDict(from_attributes=True)
 
 
 class CameraStats(BaseModel):

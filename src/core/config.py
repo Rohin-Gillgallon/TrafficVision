@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -8,8 +8,12 @@ class Settings(BaseSettings):
     poll_interval_seconds: int = 300
     yolo_model: str = "yolov8n.pt"
 
-    class Config:
-        env_file = ".env"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,  # This allows TFL_API_KEY to map to tfl_api_key
+        extra="ignore",
+    )
 
 
 settings = Settings()
